@@ -2,8 +2,6 @@ import  os
 import  tensorflow as tf
 import  numpy as np
 from    tensorflow import keras
-from    PIL import Image
-from    matplotlib import pyplot as plt
 
 
 tf.random.set_seed(22)
@@ -24,10 +22,6 @@ x_train, x_test = x_train.astype(np.float32) / 255., x_test.astype(np.float32) /
 
 print(x_train.shape, y_train.shape)
 print(x_test.shape, y_test.shape)
-
-
-# image grid
-new_im = Image.new('L', (280, 280))
 
 image_size = 28*28
 h_dim = 20
@@ -128,13 +122,8 @@ for epoch in range(num_epochs):
     for i in range(0, 280, 28):
         for j in range(0, 280, 28):
             im = x_concat[index]
-            im = Image.fromarray(im, mode='L')
-            new_im.paste(im, (i, j))
             index += 1
 
-    new_im.save('images/vae_reconstructed_epoch_%d.png' % (epoch + 1))
-    plt.imshow(np.asarray(new_im))
-    plt.show()
     print('New images saved !')
 
 
